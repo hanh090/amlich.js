@@ -1,0 +1,8 @@
+# Ensure shell scripts always use LF line endings
+*.sh text eol=lf
+*.tmux text eol=lf
+
+# Ensure executable permissions are preserved for scripts
+bin/tmux-lunar-date text eol=lf
+scripts/lunar-date.sh text eol=lf
+lunar-date.tmux text eol=lf
