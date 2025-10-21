@@ -2,14 +2,17 @@
 # Add this to your ~/.tmux.conf file
 
 # ============================================================
-# Method 1: Using tmux interpolation (Recommended)
+# Method 1: Using TPM (Tmux Plugin Manager) - Recommended
 # ============================================================
-# Load the plugin (adjust path to where you cloned the repo)
-run-shell ~/amlich.js/lunar-date.tmux
+# Add the plugin to TPM
+set -g @plugin 'hanh090/amlich.js'
 
 # Use #{lunar_date} variable in your status bar
 set -g status-right "#{lunar_date} | %H:%M %d-%b-%y"
 set -g status-interval 60
+
+# Then press prefix + I to install the plugin
+# The #{lunar_date} variable will work automatically!
 
 # Alternative: Display lunar date on the left
 # set -g status-left "#{lunar_date} | "
@@ -18,7 +21,17 @@ set -g status-interval 60
 # set -g status-right "#{lunar_date} | %A, %d %B %Y %H:%M"
 
 # ============================================================
-# Method 2: Direct command substitution
+# Method 2: Manual installation with run-shell
+# ============================================================
+# Load the plugin (adjust path to where you cloned the repo)
+# run-shell ~/.tmux/plugins/amlich.js/lunar-date.tmux
+
+# Use #{lunar_date} variable in your status bar
+# set -g status-right "#{lunar_date} | %H:%M %d-%b-%y"
+# set -g status-interval 60
+
+# ============================================================
+# Method 3: Direct command substitution
 # ============================================================
 # Display lunar calendar in the right side of status bar
 # set -g status-right "#(/path/to/amlich.js/bin/tmux-lunar-date) | %H:%M %d-%b-%y"
