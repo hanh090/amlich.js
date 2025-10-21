@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+const { computeDateToLunarDate } = require('../lib/index.js')
+
+// Get current date
+const now = new Date()
+const day = now.getDate()
+const month = now.getMonth() + 1 // JavaScript months are 0-indexed
+const year = now.getFullYear()
+
+// Vietnam timezone (UTC+7)
+const timeZone = 7
+
+// Calculate lunar date
+const lunar = computeDateToLunarDate(day, month, year, timeZone)
+
+// Format output for tmux status bar
+const lunarStr = `${lunar.lunarDay}/${lunar.lunarMonth}${lunar.lunarLeap ? '(nhuận)' : ''}`
+const gregorianStr = `${day}/${month}`
+
+// Output format: Gregorian | Lunar (Vietnamese)
+console.log(`${gregorianStr} | ${lunarStr} AL`)
