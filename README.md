@@ -26,16 +26,41 @@ console.log(computeDateToLunarDate(18, 7, 2018, 7))
 
 #### In tmux Status Bar
 
-You can display the Vietnamese lunar calendar in your tmux status bar.
+You can display the Vietnamese lunar calendar in your tmux status bar using the `#{lunar_date}` variable.
 
-**Installation:**
+**Method 1: Using TPM (Tmux Plugin Manager) - Recommended**
 
-1. Clone or install this repository
-2. Add to your `~/.tmux.conf`:
-
+1. Add plugin to your `~/.tmux.conf`:
 ```bash
-# Replace /path/to/amlich.js with the actual path
-set -g status-right "#(/path/to/amlich.js/bin/tmux-lunar-date) | %H:%M %d-%b-%y"
+set -g @plugin 'hanh090/amlich.js'
+```
+
+2. Use `#{lunar_date}` in your status bar:
+```bash
+set -g status-right "#{lunar_date} | %H:%M %d-%b-%y"
+set -g status-interval 60
+```
+
+3. Install the plugin:
+   - Press `prefix + I` (capital i) to fetch and load the plugin
+   - Or run: `~/.tmux/plugins/tpm/bin/install_plugins`
+
+The `#{lunar_date}` variable will now work automatically!
+
+**Method 2: Manual installation with run-shell**
+
+1. Clone this repository:
+```bash
+git clone https://github.com/hanh090/amlich.js ~/.tmux/plugins/amlich.js
+```
+
+2. Add to your `~/.tmux.conf`:
+```bash
+# Load the plugin
+run-shell ~/.tmux/plugins/amlich.js/lunar-date.tmux
+
+# Use #{lunar_date} in your status bar
+set -g status-right "#{lunar_date} | %H:%M %d-%b-%y"
 set -g status-interval 60
 ```
 
@@ -44,9 +69,17 @@ set -g status-interval 60
 tmux source-file ~/.tmux.conf
 ```
 
+**Method 3: Direct command substitution**
+
+```bash
+# Replace /path/to/amlich.js with the actual path
+set -g status-right "#(/path/to/amlich.js/bin/tmux-lunar-date) | %H:%M %d-%b-%y"
+set -g status-interval 60
+```
+
 **Example output:**
 ```
-21/10 | 1/9 AL
+21/10 | 1/9 AL | 14:30 21-Oct-25
 ```
 
 Where:
